@@ -1,0 +1,12 @@
+# venv stuff
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+venv.bat
+
+# __pycache__
+__pycache__
+
+# env
+.env
