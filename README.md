@@ -1,4 +1,4 @@
-# Skyline College Computer Science Bot (we don't a name yet)!
+# Skyline College Computer Science Bot (we don't have a name yet)!
 
 ## How to Install & Run
 
