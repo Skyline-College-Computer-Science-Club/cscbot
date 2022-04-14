@@ -44,7 +44,7 @@ cd ..
 pip install -r requirements.txt
 ```
 
-#### Create .env file and copy the following:
+#### Create .env file and paste the following:
 
 ```
 DISCORD_TOKEN=<your token>
