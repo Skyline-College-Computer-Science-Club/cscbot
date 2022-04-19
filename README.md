@@ -25,7 +25,7 @@ Paste the generated URL into your browser and invite your bot to your server.
 ### Set up Local Developer Environment
 
 ```
-git clone https://github.com/johncmanuel/cscbot
+git clone https://github.com/Skyline-College-Computer-Science-Club/cscbot.git
 cd cscbot
 ```
 
