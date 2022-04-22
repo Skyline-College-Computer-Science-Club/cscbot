@@ -62,7 +62,7 @@ async def on_member_join(member):
     # Save image in memory, 'seek' to the start of memory and save
     # it as a discord File
     # Source: https://stackoverflow.com/questions/65496133/discord-py-send-bytesio
-    # Read more about io.BytesIO(): https://docs.python.org/3/library/io.html#binary-i-o
+    # Read more about io.BytesIO: https://docs.python.org/3/library/io.html#binary-i-o
     with io.BytesIO() as binary_image:
         img.save(binary_image)
         binary_image.seek(0)
