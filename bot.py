@@ -1,12 +1,23 @@
 import discord
 import os
+import io
+import pytz
+from datetime import datetime
 from dotenv import load_dotenv
+from utils.image_utils import ImageText
 from discord.ext import commands
 
 # Load environment variables from .env file
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+WELCOME_CHANNEL_ID = int(os.getenv('WELCOME_CHANNEL_ID'))
+
+FONT = 'assets/fonts/quicksand.ttf'
+FONT_COLOR = 'black'
+FONT_SIZE = 70
+WELCOME_IMG_PATH = 'assets/imgs/welcome.png'
+PST = pytz.timezone('US/Pacific')
 
 # Intialize bot and all of the intents
 # discord.Intents.all() basically gives the bot superpowers
@@ -28,9 +39,36 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    # May need to adjust the channel location for the comp sci club
-    channel = member.guild.text_channels[0]
+    # Get new member's discord name and discriminator
+    # Example name: gojosatoru#1337 
+    text = f"{member.name}#{member.discriminator}"
+
+    print(f'Someone joined! - {text}',)
+    channel = bot.get_channel(WELCOME_CHANNEL_ID)
     await channel.send(f'Welcome to the the greatest club in Skyline College history {member.mention}! :D')
+    
+    # Get current time in PST
+    current_time = datetime.now(tz=PST).strftime("%Y%m%d")
+    
+    # Set up welcome image
+    img = ImageText(WELCOME_IMG_PATH, background=(255, 255, 255, 200))
+    width = 684
+    height = 567
+
+    # Write text to the image
+    img.write_text_box((width, height), text, box_width=200, font_filename=FONT,
+        font_size=FONT_SIZE, color=FONT_COLOR, place='center')
+
+    # Save image in memory, 'seek' to the start of memory and save
+    # it as a discord File
+    # Source: https://stackoverflow.com/questions/65496133/discord-py-send-bytesio
+    # Read more about io.BytesIO(): https://docs.python.org/3/library/io.html#binary-i-o
+    with io.BytesIO() as binary_image:
+        img.save(binary_image)
+        binary_image.seek(0)
+        meme = discord.File(fp=binary_image, filename=f'{current_time}_skylinecsc_welcome_{member}_{member.guild}.png')
+
+    await channel.send(file=meme)
 
 @bot.event
 async def on_message(message):
