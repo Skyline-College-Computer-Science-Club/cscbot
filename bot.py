@@ -6,6 +6,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from utils.image_utils import ImageText
 from discord.ext import commands
+from keep_alive import keep_alive
 
 # Load environment variables from .env file
 load_dotenv()
@@ -115,6 +116,7 @@ async def on_command_error(ctx, error):
     await ctx.send(message, delete_after=10)
     await ctx.message.delete(delay=10)
 
-# Execute client
+# Execute client and run server
+keep_alive()
 bot.run(TOKEN, bot=True, reconnect=True)
 
