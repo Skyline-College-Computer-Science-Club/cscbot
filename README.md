@@ -49,6 +49,8 @@ pip install -r requirements.txt
 ```
 DISCORD_TOKEN=<your token>
 DISCORD_GUILD=<name of your bot development server>
+WELCOME_CHANNEL_ID=<id of channel you want to send welcome msgs to new members>
+IMGS_CHANNEL_ID=<id of channel you want to receive memes>
 ```
 
 ### Running the bot
