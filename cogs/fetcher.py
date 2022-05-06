@@ -8,6 +8,7 @@ from discord.ext import commands, tasks
 
 load_dotenv()
 GUILD = os.getenv('DISCORD_GUILD')
+IMGS_CHANNEL_ID = int(os.getenv('IMGS_CHANNEL_ID'))
 
 class Fetcher(commands.Cog):
 
@@ -47,7 +48,7 @@ class Fetcher(commands.Cog):
         
         # Get text channel for sending the memes
         guild = discord.utils.get(self.bot.guilds, name=GUILD)
-        channel = discord.utils.get(guild.text_channels, name='off-topic')
+        channel = discord.utils.get(guild.text_channels, id=IMGS_CHANNEL_ID)
         await channel.send('@here **Hello fellow programmers! Here are your latest memes from _r/ProgrammerHumor_ for today!**')
 
         # Pack each meme into an embed and send it to the specified channel
