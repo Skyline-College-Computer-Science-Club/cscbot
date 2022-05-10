@@ -33,7 +33,7 @@ class Fetcher(commands.Cog):
             # with requests.
             # If desired, feel free to change the limit. (max is 100)
             # https://www.reddit.com/dev/api/#GET_hot
-            LIMIT = 15
+            LIMIT = 7
             async with session.get(f'https://www.reddit.com/r/ProgrammerHumor/hot.json?limit={LIMIT}', headers=self.browser_headers) as r:
                 if r.status == 200:
                     hot = await r.json()
