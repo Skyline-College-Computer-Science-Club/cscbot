@@ -18,12 +18,7 @@ class Fetcher(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        # self.get_programming_memes.start()
 
-    # def cog_unload(self):
-    #     self.get_programming_memes.cancel()
-
-    # @tasks.loop(hours=24.0)
     @commands.command(name='memes', help="Rolls the dice, ranging from either 1 to 100.")
     async def get_programming_memes(self, ctx):
         print('Fetching memes...')
@@ -47,11 +42,6 @@ class Fetcher(commands.Cog):
             'image': unescape(post['data']['preview']['images'][0]['source']['url'])
         } for post in posts if post['data']['link_flair_text'] == 'Meme']
         
-        # Get text channel for sending the memes
-        # guild = discord.utils.get(self.bot.guilds, name=GUILD)
-        # channel = discord.utils.get(guild.text_channels, id=IMGS_CHANNEL_ID)
-        # await channel.send('@here **Hello fellow programmers! Here are your latest memes from _r/ProgrammerHumor_ for today!**')
-
         # Pack each meme into an embed and send it to the specified channel
         for each_meme in memes:
             embed = discord.Embed(color=discord.Color.gold(), 
@@ -67,10 +57,5 @@ class Fetcher(commands.Cog):
 
         await ctx.send('**Want to view more?** https://www.reddit.com/r/ProgrammerHumor/')
 
-    # @get_programming_memes.before_loop
-    # async def before_get_programming_memes(self):
-    #     print('Prepping the bot for fetching the hottest memes of the century...')
-    #     await self.bot.wait_until_ready()
-        
 def setup(bot):
     bot.add_cog(Fetcher(bot))

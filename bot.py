@@ -71,19 +71,6 @@ async def on_member_join(member):
 
     await channel.send(file=meme)
 
-# :)
-# 
-# @bot.event
-# async def on_message(message):
-#     """ Responds if b00chan types. """
-#     boochan_id = 316816595668172800
-#     emoji = '👍'
-#     if message.author.id == boochan_id:
-#         bot_msg = f"<@{message.author.id}> ||L+ratio||"
-#         bot_msg = await message.channel.send(bot_msg)
-#         await bot_msg.add_reaction(emoji)
-#     await bot.process_commands(message)
-
 @bot.event
 async def on_command_error(ctx, error):
     """ Error handling for bot commands """
